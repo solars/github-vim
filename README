@@ -1,0 +1,40 @@
+= github.vim
+
+http://github.com/solars/github_vim/
+
+== Description
+
+This is a quick and dirty vim plugin to use with the scripts included in 
+github-tmbundle written by drnic, available at http://github.com/drnic/github-tmbundle
+
+It enables you to select a section of a file in a local repository (in visual mode), and
+open a direct link to the corresponding file in the github remote repository, including
+your selection.
+
+== Suggested installation
+
+1. Goto http://github.com/drnic/github-tmbundle and copy tree/master/Support/lib/show_in_github.rb
+   to ~/lib/show_in_github.rb
+
+2. Copy github.vim to ~/.vim/plugins/github.vim
+
+3. Copy open_github.rb to ~/bin/open_github.rb
+
+The resulting file structure:
+
+  ~/.vim/plugins/github.vim
+  ~/lib/show_in_github.rb
+  ~/bin/open_github.rb
+
+4. Create a mapping in your ~/.vimrc
+
+  map <F5> :call Gitopen()<cr>
+
+== Usage
+
+Select some code, and press F5 :)
+
+== Notes
+
+Since this is one of my first vim plugins, feel free to send patches :)
+sol@textmode.at
