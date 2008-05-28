@@ -3,11 +3,18 @@ if exists("loaded_github") || &cp
 endif
 
 function! Gitopen() range
-  let $VIM_START_LINE=a:firstline
-  let $VIM_END_LINE=a:lastline
-  let $VIM_FILEPATH=expand("%:p")
-  silent! rubyf $HOME/bin/open_github.rb
+  let $GIT_LINE_START=a:firstline
+  let $GIT_LINE_END=a:lastline
+  let $GIT_FILEPATH=expand("%:p")
+  rubyf $HOME/bin/github_open.rb
 endfunction
 
-" example mapping for ~/.vimrc
+function! Gitcomment()
+  let $GIT_CURRENT_LINE = getline('.')
+  let $GIT_FILEPATH = expand("%:p")
+  rubyf $HOME/bin/github_comment.rb
+endfunction
+
+" example mappings for ~/.vimrc
 " map <F5> :call Gitopen()<cr>
+" map <F6> :call Gitcomment()<cr>
