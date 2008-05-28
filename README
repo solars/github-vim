@@ -16,14 +16,15 @@ It enables you to:
 
 The file structure should be clear, root is your $HOME
 
-Example mapping for ~/.vimrc
-
-map <F5> :call Gitopen()<cr>
-map <F6> :call Gitcomment()<cr>
-
 == Usage
 
-Select some code/a line and press F5/F6 :)
+  - Comment Commit: on the relevant line Press 'ghc' in normal mode
+  - Open Selection: create a selection in visual mode and press 'gho'
+
+To remap the keybinding in your ~/.vimrc use:
+
+  map <F5> :call Gitopen()<cr>
+  map <F6> :call Gitcomment()<cr>
 
 == Notes
 
