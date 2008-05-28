@@ -23,8 +23,8 @@ The file structure should be clear, root is your $HOME
 
 To remap the keybinding in your ~/.vimrc use:
 
-  map <F5> :call Gitopen()<cr>
-  map <F6> :call Gitcomment()<cr>
+  - map <F5> <Plug>GithubOpen
+  - map <F6> <Plug>GithubComment
 
 == Notes
 
