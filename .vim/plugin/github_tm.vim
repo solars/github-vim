@@ -1,4 +1,4 @@
-if exists("loaded_github") || &cp 
+if exists("loaded_github_tm") || &cp 
   finish 
 endif
 
