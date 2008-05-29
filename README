@@ -1,11 +1,11 @@
-= github.vim
+= github.vim http://github.com/solars/github_vim/
 
-http://github.com/solars/github_vim/
+I tried to remove the dependency on drnics github-tmbundle scripts in this branch,
+please report any errors and feel free to correct/suggest/add.
 
 == Description
 
-This is a quick and dirty vim plugin to use with the scripts included in 
-github-tmbundle written by drnic, available at http://github.com/drnic/github-tmbundle
+This is a quick and dirty vim plugin to use some github features locally from vim.
 
 It enables you to:
   
@@ -14,7 +14,7 @@ It enables you to:
 
 == Suggested installation
 
-The file structure should be clear, root is your $HOME
+The file structure should be clear, just copy the github.vim into ~/.vim/plugin/
 
 == Usage
 
@@ -28,7 +28,5 @@ To remap the keybinding in your ~/.vimrc use:
 
 == Notes
 
-The files in /lib/drnic are contained in http://github.com/drnic/github-tmbundle, written by drnic.
-
-Since this is one of my first vim plugins, feel free to send corrections or improvements :)
+Since this is my first vim plugins, feel free to send corrections or improvements :)
 sol@textmode.at
