@@ -1,11 +1,11 @@
-= github.vim
+== github.vim http://github.com/solars/github_vim/
 
-http://github.com/solars/github_vim/
 
 == Description
 
-This is a quick and dirty vim plugin to use with the scripts included in 
-github-tmbundle written by drnic, available at http://github.com/drnic/github-tmbundle
+This is a quick and dirty vim to use some github functionality from vim.
+This branch uses the the scripts included in github-tmbundle written by drnic,
+available at http://github.com/drnic/github-tmbundle
 
 It enables you to:
   
