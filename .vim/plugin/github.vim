@@ -10,28 +10,28 @@ endif
 
 function! s:Open() range
   if empty(s:RepositoryRoot()) || empty(s:Remote())
-    echo "File not in repository or no remote found!"
+    call s:error("File not in repository or no remote found!")
   else
     let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
-    call system("openUrl '".url."'")
+    call s:OpenUrl(url)
   end
 endfunction
 
 function! s:Comment()
   if empty(s:RepositoryRoot()) || empty(s:Remote())
-    echo "File not in repository or no remote found!"
+    call s:error("File not in repository or no remote found!")
   else
     let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
     let line = line('.')
     let output = s:CdExec(s:RepositoryRoot(),'git blame -l -s -L '.line.','.line.' '.s:RelPath())
     if empty(output)
-      echo "No commit found"
+      s:error("No commit found")
       return
     end
     let commit = split(output)[0]
     let index=s:CommitIndex(commit)
     let url = s:ProjectUrl().'/commit/'.commit.'/'.s:RelPath().'#diff-'.index
-    call system("openUrl '".url."'")
+    call s:OpenUrl(url)
   endif
 endfunction
 
@@ -150,4 +150,34 @@ function! s:CdExec(dir,cmd)
   let output=system(a:cmd)
   exe 'lcd '.cur_dir
   return output
+endfunction
+
+function! s:EscapeUrl(str)
+  return substitute(a:str,'\C[ !%#]','\\&','g')
+endfunction
+
+" print and set error msg
+function! s:error(msg)
+  echohl ErrorMsg
+  echomsg a:msg
+  echohl None
+  let v:errmsg = a:msg
+endfunction
+
+" OpenURL helper
+function! s:OpenUrl(url)
+  if !exists(":OpenURL")
+    if has("gui_mac")
+      command -bar -nargs=1 OpenURL :!open <args>
+    elseif has("gui_win32")
+      command -bar -nargs=1 OpenURL :!start cmd /cstart /b <args>
+    elseif executable("sensible-browser")
+      command -bar -nargs=1 OpenURL :!sensible-browser <args>
+    endif
+  endif
+  if exists(":OpenURL")
+    exe "OpenURL ".s:EscapeUrl(a:url)
+  else
+    call s:error('Please define the OpenURL cmd for your system (:help OpenURL)')
+  endif
 endfunction
