@@ -57,7 +57,7 @@ vnoremap <silent> <SID>Open :call <SID>Open()<CR>
 function! s:RepositoryRoot() "+error checks
   if !exists('b:repos_root')
     let dir = expand("%:p:h")
-    let rel_path = s:CdExec(dir,'git-rev-parse --show-cdup')
+    let rel_path = s:CdExec(dir,'git rev-parse --show-cdup')
     if !empty(matchstr(rel_path,'fatal'))
       return
     end
