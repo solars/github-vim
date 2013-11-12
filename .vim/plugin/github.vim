@@ -100,7 +100,7 @@ function! s:Remote()
     endif
     let dict={}
     for line in github_remotes
-      let [name,url]=split(line)
+      let [name,url]=remove(split(line),0,1)
       let dict[name]=url
     endfor
     let fallback = split(github_remotes[0])[1]
