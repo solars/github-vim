@@ -167,7 +167,8 @@ endfunction
 " OpenURL helper
 function! s:OpenUrl(url)
   if !exists(":OpenURL")
-    if has("gui_mac")
+    let os = substitute(system('uname'), '\n', '', '')
+    if has("gui_mac") || os == 'Darwin'
       command -bar -nargs=1 OpenURL :!open <args>
     elseif has("gui_win32")
       command -bar -nargs=1 OpenURL :!start cmd /cstart /b <args>
