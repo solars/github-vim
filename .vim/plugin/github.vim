@@ -57,7 +57,7 @@ vnoremap <silent> <SID>Open :call <SID>Open()<CR>
 function! s:RepositoryRoot() "+error checks
   if !exists('b:repos_root')
     let dir = expand("%:p:h")
-    let rel_path = s:CdExec(dir,'git-rev-parse --show-cdup')
+    let rel_path = s:CdExec(dir,'git rev-parse --show-cdup')
     if !empty(matchstr(rel_path,'fatal'))
       return
     end
@@ -100,7 +100,7 @@ function! s:Remote()
     endif
     let dict={}
     for line in github_remotes
-      let [name,url]=split(line)
+      let [name,url]=remove(split(line),0,1)
       let dict[name]=url
     endfor
     let fallback = split(github_remotes[0])[1]
@@ -167,7 +167,8 @@ endfunction
 " OpenURL helper
 function! s:OpenUrl(url)
   if !exists(":OpenURL")
-    if has("gui_mac")
+    let os = substitute(system('uname'), '\n', '', '')
+    if has("gui_mac") || os == 'Darwin'
       command -bar -nargs=1 OpenURL :!open <args>
     elseif has("gui_win32")
       command -bar -nargs=1 OpenURL :!start cmd /cstart /b <args>
