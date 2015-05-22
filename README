@@ -11,6 +11,7 @@ It enables you to:
   
   - open a link to the corresponding github file of a local vim selection
   - add a comment to the corresponding github commit of a locally selected line
+  - yank a link to the corresponding github file of a local vim selection into the system clipboard
 
 == Suggested installation
 
@@ -20,6 +21,7 @@ The file structure should be clear, just copy the github.vim into ~/.vim/plugin/
 
   - Comment Commit: on the relevant line Press 'ghc' in normal mode
   - Open Selection: create a selection in visual mode and press 'gho'
+  - Yank Selection: create a selection in visual mode and press 'ghy'
 
 To remap the keybinding in your ~/.vimrc use:
 
