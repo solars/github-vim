@@ -17,6 +17,15 @@ function! s:Open() range
   end
 endfunction
 
+function! s:Yank()
+  if empty(s:RepositoryRoot()) || empty(s:Remote())
+    call s:error("File not in repository or no remote found!")
+  else
+    let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
+    call s:YankUrl(url)
+  end
+endfunction
+
 function! s:Comment()
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
@@ -50,6 +59,11 @@ endif
 vnoremap <unique> <script> <Plug>GithubOpen <SID>Open
 vnoremap <silent> <SID>Open :call <SID>Open()<CR>
 
+if !hasmapto('<Plug>GithubYank', 'v')
+  vmap <unique>ghy <Plug>GithubYank
+endif
+vnoremap <unique> <script> <Plug>GithubYank <SID>Yank
+vnoremap <silent> <SID>Yank :call <SID>Yank()<CR>
 
 " --- helpers --- "
 
@@ -180,5 +194,17 @@ function! s:OpenUrl(url)
     exe "OpenURL ".s:EscapeUrl(a:url)
   else
     call s:error('Please define the OpenURL cmd for your system (:help OpenURL)')
+  endif
+endfunction
+
+" YankURL helper
+function! s:YankUrl(url)
+  let os = substitute(system('uname'), '\n', '', '')
+  if has("gui_mac") || os == 'Darwin'
+    silent call system('pbcopy', a:url)
+  elseif has("gui_win32")
+    silent call system('clip', a:url) 
+  else
+    silent call system('xsel --clipboard --input', a:url) 
   endif
 endfunction
