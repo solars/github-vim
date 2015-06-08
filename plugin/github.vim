@@ -134,7 +134,7 @@ function! s:ProjectUrl()
   if !exists('b:project_url')
     let remote_url = s:Remote()
     let user = matchstr(remote_url,'.*github\.com[:/]\zs[^/]\+\ze\/.*')
-    let project = matchstr(remote_url,'.*github\.com[:/][^/]\+\/\zs[^.]\+\ze\.git')
+    let project = matchstr(remote_url,'.*github\.com[:/][^/]\+\/\zs[^.]\+\ze\(\.git\)\=')
     let b:project_url = 'http://github.com/'.user.'/'.project
   endif
   return b:project_url
