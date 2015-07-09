@@ -135,7 +135,7 @@ function! s:ProjectUrl()
     let remote_url = s:Remote()
     let user = matchstr(remote_url,'.*github\.com[:/]\zs[^/]\+\ze\/.*')
     let project = matchstr(remote_url,'.*github\.com[:/][^/]\+\/\zs[^.]\+\ze\(\.git\)\=')
-    let b:project_url = 'http://github.com/'.user.'/'.project
+    let b:project_url = 'https://github.com/'.user.'/'.project
   endif
   return b:project_url
 endfunction
@@ -143,7 +143,7 @@ endfunction
 " the github repository url
 function! s:ReposUrl()
   if !exists('b:repos_url')
-    let b:repos_url = s:ProjectUrl().'/tree/'.s:CurrentBranch()
+    let b:repos_url = s:ProjectUrl().'/blob/'.s:CurrentBranch()
   endif
   return b:repos_url
 endfunction
