@@ -12,7 +12,11 @@ function! s:Open() range
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
   else
-    let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
+    let hash = '#L'.a:firstline.'-'.a:lastline
+    if a:firstline == a:lastline
+      let hash = '#L'.a:firstline
+    endif
+    let url = s:ReposUrl() . '/' . s:RelPath() . hash
     call s:OpenUrl(url)
   end
 endfunction
@@ -21,7 +25,11 @@ function! s:Yank()
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
   else
-    let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
+    let hash = '#L'.a:firstline.'-'.a:lastline
+    if a:firstline == a:lastline
+      let hash = '#L'.a:firstline
+    endif
+    let url = s:ReposUrl() . '/' . s:RelPath() . hash
     call s:YankUrl(url)
   end
 endfunction
