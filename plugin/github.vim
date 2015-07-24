@@ -1,4 +1,4 @@
-" http://github.com/solars/github-vim/
+" https://github.com/solars/github-vim/
 " sol@textmode.at
 
 if exists("loaded_github") || &cp 
@@ -143,7 +143,7 @@ function! s:ProjectUrl()
     let remote_url = s:Remote()
     let user = matchstr(remote_url,'.*github\.com[:/]\zs[^/]\+\ze\/.*')
     let project = matchstr(remote_url,'.*github\.com[:/][^/]\+\/\zs[^.]\+\ze\(\.git\)\=')
-    let b:project_url = 'http://github.com/'.user.'/'.project
+    let b:project_url = 'https://github.com/'.user.'/'.project
   endif
   return b:project_url
 endfunction
