@@ -7,16 +7,19 @@ endif
 
 
 " --- main functions --- "
+function! s:Hash(n1,n2)
+  if a:n1 == a:n2
+    return '#L' . a:n1
+  else
+    return '#L' . a:n1 . '-' . a:n2
+  endif
+endfunction
 
 function! s:Open() range
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
   else
-    let hash = '#L'.a:firstline.'-'.a:lastline
-    if a:firstline == a:lastline
-      let hash = '#L'.a:firstline
-    endif
-    let url = s:ReposUrl() . '/' . s:RelPath() . hash
+    let url = s:ReposUrl().'/'.s:RelPath(). s:Hash(a:firstline,a:lastline)
     call s:OpenUrl(url)
   end
 endfunction
@@ -25,12 +28,9 @@ function! s:Yank()
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
   else
-    let hash = '#L'.a:firstline.'-'.a:lastline
-    if a:firstline == a:lastline
-      let hash = '#L'.a:firstline
-    endif
-    let url = s:ReposUrl() . '/' . s:RelPath() . hash
+    let url = s:ReposUrl().'/'.s:RelPath() . s:Hash(a:firstline,a:lastline)
     call s:YankUrl(url)
+    echo "GitHub URL: " . url
   end
 endfunction
 
@@ -38,7 +38,7 @@ function! s:Comment()
   if empty(s:RepositoryRoot()) || empty(s:Remote())
     call s:error("File not in repository or no remote found!")
   else
-    let url = s:ReposUrl().'/'.s:RelPath().'#L'.a:firstline.'-'.a:lastline
+    let url = s:ReposUrl().'/'.s:RelPath() . s:Hash(a:firstline,a:lastline)
     let line = line('.')
     let output = s:CdExec(s:RepositoryRoot(),'git blame -l -s -L '.line.','.line.' '.s:RelPath())
     if empty(output)
@@ -68,10 +68,11 @@ vnoremap <unique> <script> <Plug>GithubOpen <SID>Open
 vnoremap <silent> <SID>Open :call <SID>Open()<CR>
 
 if !hasmapto('<Plug>GithubYank', 'v')
-  vmap <unique>ghy <Plug>GithubYank
+  map <unique>ghy <Plug>GithubYank
 endif
-vnoremap <unique> <script> <Plug>GithubYank <SID>Yank
-vnoremap <silent> <SID>Yank :call <SID>Yank()<CR>
+
+noremap <unique> <script> <Plug>GithubYank <SID>Yank
+noremap <silent> <SID>Yank :call <SID>Yank()<CR>
 
 " --- helpers --- "
 
