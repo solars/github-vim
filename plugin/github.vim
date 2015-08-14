@@ -113,7 +113,7 @@ function! s:RelPath()
 endfunction
 
 " finds the github remote repository identifier
-" precedence: github > origin > other
+" precedence: github > upstream > origin > other
 function! s:Remote()
   if !exists('b:remote')
     let remotes = split(s:CdExec(expand("%:p:h"),'git remote -v'),"\n")
@@ -129,6 +129,8 @@ function! s:Remote()
     let fallback = split(github_remotes[0])[1]
     if has_key(dict, 'github')
       let b:remote = dict['github']
+    elseif has_key(dict,'upstream')
+      let b:remote = dict['upstream']
     elseif has_key(dict,'origin')
       let b:remote = dict['origin']
     else
