@@ -11,7 +11,7 @@ function! s:Hash(n1,n2)
   if a:n1 == a:n2
     return '#L' . a:n1
   else
-    return '#L' . a:n1 . '-' . a:n2
+    return '#L' . a:n1 . ',L' . a:n2
   endif
 endfunction
 
