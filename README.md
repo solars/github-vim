@@ -20,6 +20,11 @@ It enables you to:
 
 The file structure should be clear, just copy the github.vim into ~/.vim/plugin/
 
+##Installing when using [Pathogen](https://github.com/tpope/vim-pathogen)
+
+    cd ~/.vim/bundle
+    git clone git@github.com:solars/github-vim.git
+
 ##Usage
 
   - Comment Commit: on the relevant line Press 'ghc' in normal mode
