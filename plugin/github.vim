@@ -152,7 +152,7 @@ endfunction
 " the github repository url
 function! s:ReposUrl()
   if !exists('b:repos_url')
-    let b:repos_url = s:ProjectUrl().'/tree/'.s:CurrentBranch()
+    let b:repos_url = s:ProjectUrl().'/blob/'.s:CurrentBranch()
   endif
   return b:repos_url
 endfunction
