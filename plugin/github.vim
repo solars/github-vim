@@ -217,3 +217,5 @@ function! s:YankUrl(url)
     silent call system('xsel --clipboard --input', a:url) 
   endif
 endfunction
+
+let loaded_github = 1
